@@ -183,6 +183,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 061c5682dbccbe940904ff0f23f453e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayMode: 2
+  uiStart: 2
+  uiEnd: 3
   waypoints:
   - {fileID: 2051061929}
   - {fileID: 1289024796}
@@ -35411,6 +35414,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 061c5682dbccbe940904ff0f23f453e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayMode: 2
+  uiStart: 1
+  uiEnd: 3
   waypoints:
   - {fileID: 299366103}
   - {fileID: 2051061929}
@@ -35456,7 +35462,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2051061928}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.51, y: 0, z: 6.83}
+  m_LocalPosition: {x: -14.66, y: 0, z: 4.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
