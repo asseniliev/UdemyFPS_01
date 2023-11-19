@@ -16,18 +16,37 @@ public class NavAgentExample : MonoBehaviour
     void Start()
     {
         // Cashe NavMeshAgent Reference
-        navAgent = this.GetComponent<NavMeshAgent>();
-        if (waypointNetwork == null) return;  // exit of this script if a network is not assigned
+        this.navAgent = this.GetComponent<NavMeshAgent>();
+        if (this.waypointNetwork == null) return;  // exit of this script if a network is not assigned
 
-        if(waypointNetwork.waypoints[currentIndex] != null)
-        {
-            navAgent.destination = waypointNetwork.waypoints[currentIndex].position;
-        }
+        SetNextDestination(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    private void SetNextDestination(bool increment)
+    {
+        if (!this.waypointNetwork) return;
+
+        int incStep = increment ? 1 : 0; // The increment step is 1 or 0, depending in the 'increment' parameter
+        Transform nextWaypointTransform = null;
+
+        while (nextWaypointTransform == null)
+        {
+            int nextWaypont = (this.currentIndex + incStep >= this.waypointNetwork.waypoints.Count) ? 0 : this.currentIndex + incStep;
+            nextWaypointTransform = this.waypointNetwork.waypoints[nextWaypont];
+            
+            if(nextWaypointTransform != null)
+            {
+                this.currentIndex = nextWaypont;
+                this.navAgent.destination = nextWaypointTransform.position;
+                return;
+            }
+            currentIndex++;
+        }
     }
 }
