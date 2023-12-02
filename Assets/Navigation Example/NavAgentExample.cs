@@ -8,9 +8,12 @@ public class NavAgentExample : MonoBehaviour
 {
     public AIWaypointNetwork waypointNetwork = null;
     public int currentIndex = 0; // the current target waypoint 
+    public bool hasPath = false;
+    public bool pathPending = false;
+    public bool isPathStale = false;
+
 
     private NavMeshAgent navAgent = null;
-
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +28,15 @@ public class NavAgentExample : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        hasPath = navAgent.hasPath;
+        pathPending = navAgent.pathPending;
+        isPathStale = navAgent.isPathStale;
+
+        if (!hasPath && !pathPending)
+            SetNextDestination(true);
+        else if (isPathStale) // This is the case when path to the destination may not be valid anymore ->
+                              // then we want to recalculate the path to the same current destination.
+            SetNextDestination(true);
     }
 
     private void SetNextDestination(bool increment)
