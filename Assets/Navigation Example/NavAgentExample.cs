@@ -11,6 +11,7 @@ public class NavAgentExample : MonoBehaviour
     public bool hasPath = false;
     public bool pathPending = false;
     public bool isPathStale = false;
+    public NavMeshPathStatus pathStatus = NavMeshPathStatus.PathInvalid;
 
 
     private NavMeshAgent navAgent = null;
@@ -28,13 +29,14 @@ public class NavAgentExample : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        hasPath = navAgent.hasPath;
-        pathPending = navAgent.pathPending;
-        isPathStale = navAgent.isPathStale;
+        this.hasPath = this.navAgent.hasPath;
+        this.pathPending = this.navAgent.pathPending;
+        this.isPathStale = this.navAgent.isPathStale;
+        this.pathStatus = this.navAgent.pathStatus;
 
-        if (!hasPath && !pathPending)
+        if ((!this.hasPath && !this.pathPending) || this.pathStatus == NavMeshPathStatus.PathInvalid)
             SetNextDestination(true);
-        else if (isPathStale) // This is the case when path to the destination may not be valid anymore ->
+        else if (this.isPathStale) // This is the case when path to the destination may not be valid anymore ->
                               // then we want to recalculate the path to the same current destination.
             SetNextDestination(true);
     }
@@ -57,7 +59,7 @@ public class NavAgentExample : MonoBehaviour
                 this.navAgent.destination = nextWaypointTransform.position;
                 return;
             }
-            currentIndex++;
+            this.currentIndex++;
         }
     }
 }
